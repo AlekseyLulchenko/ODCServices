@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Utilities\Agilent.OpenLAB.Installation.Utilities.dll" />
+    <None Remove="Utilities\DecodePaswd.exe" />
+    <None Remove="Utilities\DecodePaswd.exe.config" />
+    <None Remove="Utilities\DecodePaswd.vshost.exe" />
+    <None Remove="Utilities\DecodePaswd.vshost.exe.config" />
+    <None Remove="Utilities\DecodePaswd.vshost.exe.manifest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Utilities\Obfuscator\Agilent.OpenLAB.Installation.Utilities.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Obfuscator\DecodePaswd.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Obfuscator\DecodePaswd.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Obfuscator\DecodePaswd.vshost.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Obfuscator\DecodePaswd.vshost.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utilities\Obfuscator\DecodePaswd.vshost.exe.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
