@@ -23,7 +23,7 @@ class ConfigList extends React.Component {
 	render() {
 		return <div>
 			<div className="text-center">
-				<h1 className="display-4">Config Storage</h1>	
+				<h1 className="display-4">Config Storage </h1>	
 			</div>
 			<ConfigTable configs={this.state.configs}/>
 		</div>;
