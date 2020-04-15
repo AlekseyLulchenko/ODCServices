@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using JavaScriptEngineSwitcher.ChakraCore;
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ODCServices.WebUi.Extensions;
-using React.AspNet;
 
 namespace ODCServices.WebUi
 {
@@ -30,9 +27,6 @@ namespace ODCServices.WebUi
 		{
 			services.AddControllersWithViews();
 			services.AddPasswordsService();
-			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-			services.AddReact();
-			services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +43,6 @@ namespace ODCServices.WebUi
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
-			app.UseReact(config => { });
 			app.UseStaticFiles();
 
 			app.UseRouting();
