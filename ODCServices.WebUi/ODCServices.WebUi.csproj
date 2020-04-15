@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="src\scripts\configStorage\configStorage.jsx" />
+    <Content Include="src\scripts\configStorage\configTable.jsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.4.5" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.linux-x64" Version="3.4.5" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.osx-x64" Version="3.4.5" />
@@ -17,6 +22,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ODCServices.Core\ODCServices.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\styles\" />
+    <Folder Include="wwwroot\dist\configStorage\" />
   </ItemGroup>
 
 </Project>
