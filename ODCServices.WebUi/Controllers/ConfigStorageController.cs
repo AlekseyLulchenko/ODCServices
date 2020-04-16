@@ -14,12 +14,12 @@ namespace ODCServices.WebUi.Controllers
 	    {
 		    _configs = new List<Config>
 		    {
-				new Config { Id = "D90E6BD0-D468-4842-8326-BA83BF00FAEE", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3" },
-				new Config { Id = "D90E6BD0-D468-4842-8326-BA83BF00FAEE", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4" },
-				new Config { Id = "D90E6BD0-D468-4842-8326-BA83BF00FAEE", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5" },
-				new Config { Id = "D90E6BD0-D468-4842-8326-BA83BF00FAEE", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3" },
-				new Config { Id = "D90E6BD0-D468-4842-8326-BA83BF00FAEE", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4" },
-				new Config { Id = "D90E6BD0-D468-4842-8326-BA83BF00FAEE", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5" },
+				new Config { Id = "id-1", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3" },
+				new Config { Id = "id-2", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4" },
+				new Config { Id = "id-3", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5" },
+				new Config { Id = "id-4", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3" },
+				new Config { Id = "id-5", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4" },
+				new Config { Id = "id-6", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5" },
 			};
 	    }
         public IActionResult Index()
@@ -28,5 +28,13 @@ namespace ODCServices.WebUi.Controllers
         }
 
         public IEnumerable<Config> GetAll() => _configs;
+
+        public IActionResult Download(string configId)
+        {
+	        return Json(new
+	        {
+		        result = _configs.Where(c => c.Id == configId)
+	        });
+        }
     }
 }

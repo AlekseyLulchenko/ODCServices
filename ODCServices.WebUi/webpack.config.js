@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     mode: 'development',
     devtool: "#eval-source-map",
-    entry: './src/scripts/configStorage/configStorage.jsx',
+    entry: './src/scripts/configStorage/index.jsx',
     module: {
         rules: [
             {
@@ -15,7 +15,16 @@ module.exports = {
 		                presets: ['@babel/preset-env']
 	                }
                 }
-            }
+            },
+	        {
+		        test: /\.svg$/,
+		        use: {
+		            loader: 'svg-url-loader',
+		            options: {
+			            limit: 10000,
+		            },
+				},
+	        }
         ]
     },
     resolve: {

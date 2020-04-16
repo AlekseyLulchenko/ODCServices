@@ -1,6 +1,14 @@
-﻿export class ConfigTable extends React.Component {
+﻿import img_download from '../../icons/download.svg';
+import img_edit from '../../icons/edit.svg';
+
+
+export class ConfigTable extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+	downloadOnClick(event) {
+		alert(event);
 	}
 
 	render() {
@@ -10,16 +18,21 @@
 				 <th scope="col">Name</th>
 				 <th scope="col">Version</th>
 				 <th scope="col">Created</th>
-				 <th scope="col">Download</th>
+					<th scope="col">Action</th>
+					<button type="button" className="btn btn-link btn-sm" onClick={this.downloadOnClick}><img src={img_download} /></button>
 				</tr>
 			</thead >
 			<tbody>{
-				this.props.configs.map(function (config, index) {
+				this.props.configs.map((config, index) => {
 					return <tr key={index}>
 						<th scope="row">{config.name}</th>
 						<td>{config.version}</td>
 						<td>{config.created}</td>
-						<td><button type="button" className="btn btn-link btn-sm">Download</button></td>
+						<td>
+							<button type="button" className="btn btn-link btn-sm" onClick={this.downloadOnClick}><img src={img_download} /></button>
+							<button type="button" className="btn btn-link btn-sm"><img src={img_edit} /></button>
+						</td>
+						
 					</tr>;
 				})
 			}
