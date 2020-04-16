@@ -33,7 +33,7 @@ namespace ODCServices.WebUi.Controllers
         {
 	        return Json(new
 	        {
-		        result = _configs.Where(c => c.Id == configId)
+		        result = _configs.FirstOrDefault(c => c.Id == configId)
 	        });
         }
     }

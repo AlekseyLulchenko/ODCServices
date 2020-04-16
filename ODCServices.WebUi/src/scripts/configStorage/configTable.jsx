@@ -7,8 +7,24 @@ export class ConfigTable extends React.Component {
 		super(props);
 	}
 
-	downloadOnClick(event) {
-		alert(event);
+	downloadOnClick(id) {
+		var downloadUrl = this.props.downloadUrl + "?configId=" + id;
+		this.getData(downloadUrl);
+	}
+
+	editOnClick(id) {
+		
+	}
+
+	getData(downloadUrl) {
+		var xhr = new XMLHttpRequest();
+		
+		xhr.open("get", downloadUrl, true);
+		xhr.onload = function () {
+			var data = JSON.parse(xhr.responseText);
+			alert(data.result.name);
+		}.bind(this);
+		xhr.send();
 	}
 
 	render() {
@@ -19,7 +35,6 @@ export class ConfigTable extends React.Component {
 				 <th scope="col">Version</th>
 				 <th scope="col">Created</th>
 					<th scope="col">Action</th>
-					<button type="button" className="btn btn-link btn-sm" onClick={this.downloadOnClick}><img src={img_download} /></button>
 				</tr>
 			</thead >
 			<tbody>{
@@ -29,8 +44,8 @@ export class ConfigTable extends React.Component {
 						<td>{config.version}</td>
 						<td>{config.created}</td>
 						<td>
-							<button type="button" className="btn btn-link btn-sm" onClick={this.downloadOnClick}><img src={img_download} /></button>
-							<button type="button" className="btn btn-link btn-sm"><img src={img_edit} /></button>
+							<button type="button" className="btn btn-link btn-sm" onClick={() => this.downloadOnClick(config.id)}><img src={img_download} /></button>
+							<button type="button" className="btn btn-link btn-sm" onClick={() => this.editOnClick(config.id)}><img src={img_edit} /></button>
 						</td>
 						
 					</tr>;

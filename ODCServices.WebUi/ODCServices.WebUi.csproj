@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="src\scripts\configStorage\configStoragePage.jsx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="src\scripts\configStorage\configStoragePage.jsx" />
     <Content Include="src\scripts\configStorage\index.jsx" />
     <Content Include="src\scripts\configStorage\configTable.jsx" />
   </ItemGroup>
