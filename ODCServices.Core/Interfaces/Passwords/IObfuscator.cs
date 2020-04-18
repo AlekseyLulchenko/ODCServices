@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ODCServices.Core.Interfaces
+namespace ODCServices.Core.Interfaces.Passwords
 {
-	public interface IPasswordManager
+	public interface IObfuscator
 	{
-		string DeObfuscate(string obfuscatedPassword);
 		string Obfuscate(string plainPassword);
+		string DeObfuscate(string obfuscatedPassword);
 	}
 }

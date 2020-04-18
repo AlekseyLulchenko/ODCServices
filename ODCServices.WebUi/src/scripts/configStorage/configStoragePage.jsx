@@ -13,7 +13,7 @@ export class ConfigStoragePage extends React.Component {
 		xhr.open("get", getAllUrl, true);
 		xhr.onload = function () {
 			var data = JSON.parse(xhr.responseText);
-			this.setState({ configs: data });
+			this.setState({ configs: data.result });
 		}.bind(this);
 		xhr.send();
 	}

@@ -31,9 +31,9 @@ export class ConfigTable extends React.Component {
 		return <table className="table table-hover table-sm">
 			<thead>
 				<tr>
-				 <th scope="col">Name</th>
-				 <th scope="col">Version</th>
-				 <th scope="col">Created</th>
+					<th scope="col">Name</th>
+					<th scope="col">Version</th>
+					<th scope="col">Created</th>
 					<th scope="col">Action</th>
 				</tr>
 			</thead >

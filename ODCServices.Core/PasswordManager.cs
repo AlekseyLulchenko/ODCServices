@@ -1,5 +1,4 @@
-﻿using System;
-using ODCServices.Core.Interfaces;
+﻿using ODCServices.Core.Interfaces.Passwords;
 
 namespace ODCServices.Core
 {

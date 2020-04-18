@@ -1,5 +1,4 @@
-﻿using ODCServices.Core;
-using ODCServices.Core.Interfaces;
+﻿using ODCServices.Core.Interfaces.Passwords;
 using ODCServices.WebUi.Interfaces.Services;
 
 namespace ODCServices.WebUi.Services

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using ODCServices.Core.Interfaces;
+using ODCServices.Core.Interfaces.Passwords;
 
 namespace ODCServices.Core.PasswordObfuscator
 {

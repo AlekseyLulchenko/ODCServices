@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ODCServices.WebUi.Models;
+using ODCServices.WebUi.Models.ConfigStorage;
 
 namespace ODCServices.WebUi.Controllers
 {
     public class ConfigStorageController : Controller
     {
-	    private List<Config> _configs;
+	    private List<UiConfig> _configs;
+
 	    public ConfigStorageController()
 	    {
-		    _configs = new List<Config>
+			List<UiConfigProperty> properties = new List<UiConfigProperty>
+			{
+				new UiConfigProperty{ DisplayName = "OLSSAdmin", Value = "admin", XmlPath = "Config.OLSS.AdminName" },
+				new UiConfigProperty{ DisplayName = "OLSSAdminPassword", Value = "Welcome01_", XmlPath = "Config.OLSS.AdminPswd" },
+			};
+		    _configs = new List<UiConfig>
 		    {
-				new Config { Id = "id-1", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3" },
-				new Config { Id = "id-2", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4" },
-				new Config { Id = "id-3", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5" },
-				new Config { Id = "id-4", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3" },
-				new Config { Id = "id-5", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4" },
-				new Config { Id = "id-6", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5" },
+				new UiConfig { Id = "id-1", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3", Properties = properties },
+				new UiConfig { Id = "id-2", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4", Properties = properties  },
+				new UiConfig { Id = "id-3", Name = "OpenLab Server", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5", Properties = properties  },
+				new UiConfig { Id = "id-4", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.3", Properties = properties  },
+				new UiConfig { Id = "id-5", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.4", Properties = properties  },
+				new UiConfig { Id = "id-6", Name = "OpenLab Client", Created = DateTime.Now.ToString("d MMM yyyy"), Version = "2.5", Properties = properties  },
 			};
 	    }
         public IActionResult Index()
@@ -27,7 +32,13 @@ namespace ODCServices.WebUi.Controllers
             return View();
         }
 
-        public IEnumerable<Config> GetAll() => _configs;
+        public IActionResult GetAll()
+        {
+			return Json(new
+			{
+				result = _configs.Select(c => new { Id = c.Id, Properties = c.GetAllProperties() }).ToList()
+			}); 
+        }
 
         public IActionResult Download(string configId)
         {

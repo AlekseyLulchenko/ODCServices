@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ODCServices.Core;
-using ODCServices.Core.Interfaces;
+using ODCServices.Core.Interfaces.Passwords;
 using ODCServices.Core.PasswordObfuscator;
 using ODCServices.WebUi.Interfaces.Services;
 using ODCServices.WebUi.Services;
