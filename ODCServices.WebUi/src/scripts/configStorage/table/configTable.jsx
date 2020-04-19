@@ -1,8 +1,4 @@
-﻿import img_download from '../../icons/download.svg';
-import img_edit from '../../icons/edit.svg';
-
-
-export class ConfigTable extends React.Component {
+﻿export class ConfigTable extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -28,6 +24,8 @@ export class ConfigTable extends React.Component {
 	}
 
 	render() {
+		var configs = this.props.configs;
+
 		return <table className="table table-hover table-sm">
 			<thead>
 				<tr>
@@ -38,8 +36,8 @@ export class ConfigTable extends React.Component {
 				</tr>
 			</thead >
 			<tbody>{
-				this.props.configs.map((config, index) => {
-					return <tr key={index}>
+				configs.map((config) => {
+					return <tr key={config["id"]}>
 						<th scope="row">{config.name}</th>
 						<td>{config.version}</td>
 						<td>{config.created}</td>

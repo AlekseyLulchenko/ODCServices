@@ -1,42 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ODCServices.WebUi.Models.ConfigStorage
 {
 	public class UiConfig
 	{
 		public string Id { get; set; }
-
 		public string Name { get; set; }
 		public string Version { get; set; }
 		public string Created { get; set; }
 
-		public List<UiConfigProperty> Properties = new List<UiConfigProperty>();
+		public Dictionary<UiConfigProperty, string> Properties = new Dictionary<UiConfigProperty, string>();
 
-		public List<UiConfigProperty> GetAllProperties()
+		public Dictionary<UiConfigProperty, string> GetAllProperties()
 		{
-			List<UiConfigProperty> ownProperties = new List<UiConfigProperty>
+			Dictionary<UiConfigProperty, string> result = new Dictionary<UiConfigProperty, string>
 			{
-				new UiConfigProperty { DisplayName = "Id", Value = Id, XmlPath = "" },
-				new UiConfigProperty { DisplayName = "Name", Value = Name, XmlPath = "" },
-				new UiConfigProperty { DisplayName = "Version", Value = Version, XmlPath = "" },
-				new UiConfigProperty { DisplayName = "Created", Value = Created, XmlPath = "" }
+				{
+					new UiConfigProperty {Id = nameof(Name), DisplayName = nameof(Name), XmlPath = ""}, 
+					nameof(Name)
+				},
+				{
+					new UiConfigProperty {Id = nameof(Version), DisplayName = nameof(Version), XmlPath = ""},
+					nameof(Version)
+				},
+				{
+					new UiConfigProperty {Id = nameof(Created), DisplayName = nameof(Created), XmlPath = ""},
+					nameof(Created)
+				}
 			};
 
-			List<UiConfigProperty> resultList = new List<UiConfigProperty>();
-			ownProperties.ForEach(p => resultList.Add(p));
-			Properties.ForEach(p => resultList.Add(p));
-			return resultList;
-		}
-
-		public void AddProperty(UiConfigProperty property)
-		{
-			if (property == null)
+			foreach (KeyValuePair<UiConfigProperty, string> property in Properties)
 			{
-				throw new ArgumentNullException(nameof(property));
+				result.Add(property.Key, property.Value);
 			}
 
-			Properties.Add(property);
+			return result;
 		}
 	}
 }

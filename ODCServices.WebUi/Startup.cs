@@ -20,6 +20,7 @@ namespace ODCServices.WebUi
 		{
 			services.AddControllersWithViews();
 			services.AddPasswordsService();
+			services.AddConfigStorageService();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

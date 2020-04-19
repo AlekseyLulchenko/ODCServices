@@ -1,7 +1,7 @@
 ﻿namespace ODCServices.Core.Interfaces.ConfigStorage
 {
-	interface IConfigStorageManager
+	public interface IConfigStorageManager
 	{
-
+		ICoreConfig GetAllConfigs();
 	}
 }

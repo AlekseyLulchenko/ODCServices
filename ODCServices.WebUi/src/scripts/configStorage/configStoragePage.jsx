@@ -1,9 +1,12 @@
-﻿import { ConfigTable } from "./configTable";
+﻿import { ConfigTable } from "./table/configTable";
 
 export class ConfigStoragePage extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { configs: [] };
+		this.state = {
+			headers: [],
+			configs: []
+		};
 	}
 
 	loadData() {
@@ -13,7 +16,10 @@ export class ConfigStoragePage extends React.Component {
 		xhr.open("get", getAllUrl, true);
 		xhr.onload = function () {
 			var data = JSON.parse(xhr.responseText);
-			this.setState({ configs: data.result });
+			this.setState({
+				headers: data.builtInHeaders.concat(data.headers),
+				configs: data.configs
+			});
 		}.bind(this);
 		xhr.send();
 	}
@@ -25,9 +31,9 @@ export class ConfigStoragePage extends React.Component {
 	render() {
 		return <div>
 			<div className="text-center">
-				<h1 className="display-4">Config Storage </h1>	
+				<h1 className="display-4">Config Storage</h1>	
 			</div>
-			<ConfigTable configs={this.state.configs} downloadUrl={this.props.downloadUrl}/>
+			<ConfigTable headers={this.state.headers} configs={this.state.configs} downloadUrl={this.props.downloadUrl}/>
 		</div>;
 	}
 }

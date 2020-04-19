@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ODCServices.Core.Interfaces.ConfigStorage
 {
-	interface ICoreConfig
+	public interface ICoreConfig
 	{
 	}
 }
