@@ -18,15 +18,15 @@ namespace ODCServices.WebUi.Models.ConfigStorage
 			{
 				{
 					new UiConfigProperty {Id = nameof(Name), DisplayName = nameof(Name), XmlPath = ""}, 
-					nameof(Name)
+					Name
 				},
 				{
 					new UiConfigProperty {Id = nameof(Version), DisplayName = nameof(Version), XmlPath = ""},
-					nameof(Version)
+					Version
 				},
 				{
 					new UiConfigProperty {Id = nameof(Created), DisplayName = nameof(Created), XmlPath = ""},
-					nameof(Created)
+					Created
 				}
 			};
 

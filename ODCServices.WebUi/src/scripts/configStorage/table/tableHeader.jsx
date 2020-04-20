@@ -4,12 +4,12 @@
 	}
 
 	render() {
-		var headers = this.props;
+		var headers = this.props.headers;
 		return <thead>
 			<tr>
 				{
 					headers.map((header) => {
-						return <th scope="col">{header.displayName}</th>;
+						return <th key={header.id} scope="col">{header.name}</th>;
 					})
 				}
 			</tr>

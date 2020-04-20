@@ -1,4 +1,7 @@
-﻿export class ConfigTable extends React.Component {
+﻿import { TableHeader } from "./tableHeader";
+import { TableRow } from "./tableRow";
+
+export class ConfigTable extends React.Component {
 	constructor(props) {
 		super(props);
 	}
@@ -24,29 +27,14 @@
 	}
 
 	render() {
+		var headers = this.props.headers;
 		var configs = this.props.configs;
 
 		return <table className="table table-hover table-sm">
-			<thead>
-				<tr>
-					<th scope="col">Name</th>
-					<th scope="col">Version</th>
-					<th scope="col">Created</th>
-					<th scope="col">Action</th>
-				</tr>
-			</thead >
+			<TableHeader headers={headers}/>
 			<tbody>{
 				configs.map((config) => {
-					return <tr key={config["id"]}>
-						<th scope="row">{config.name}</th>
-						<td>{config.version}</td>
-						<td>{config.created}</td>
-						<td>
-							<button type="button" className="btn btn-link btn-sm" onClick={() => this.downloadOnClick(config.id)}><img src={img_download} /></button>
-							<button type="button" className="btn btn-link btn-sm" onClick={() => this.editOnClick(config.id)}><img src={img_edit} /></button>
-						</td>
-						
-					</tr>;
+					return <TableRow headers={headers} config={config}/>;
 				})
 			}
 			</tbody>

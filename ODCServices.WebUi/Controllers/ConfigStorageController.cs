@@ -44,7 +44,8 @@ namespace ODCServices.WebUi.Controllers
 					.GetConfigs()
 					.Select(config => new
 						{
-							properties = config.GetAllProperties().Select(p => new { id = p.Key.Id, value = p.Value }).ToList()
+							configId = config.Id,
+							properties = config.GetAllProperties().Select(p => new { propId = p.Key.Id, propValue = p.Value }).ToList()
 						})
 					.ToList()
 			});

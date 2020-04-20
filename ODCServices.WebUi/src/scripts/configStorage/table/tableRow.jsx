@@ -1,7 +1,6 @@
 ﻿import img_download from '../../../icons/download.svg';
 import img_edit from '../../../icons/edit.svg';
 
-
 export class TableRow extends React.Component {
 	constructor(props) {
 		super(props);
@@ -28,16 +27,25 @@ export class TableRow extends React.Component {
 	}
 
 	render() {
-		var configProperties = this.props.configProperties;
-		return <tr key={config["id"]}>
-			<th scope="row">{config.name}</th>
-			<td>{config.version}</td>
-			<td>{config.created}</td>
-			<td>
-				<button type="button" className="btn btn-link btn-sm" onClick={() => this.downloadOnClick(config.id)}><img src={img_download} /></button>
-				<button type="button" className="btn btn-link btn-sm" onClick={() => this.editOnClick(config.id)}><img src={img_edit} /></button>
-			</td>
-			
+		var config = this.props.config;
+		var configId = config.id;
+		var headers = this.props.headers;
+		var properties = config.properties;
+		return <tr key={configId}>{
+			properties.map((property) => {
+				if (property.propId === "Name") {
+					return <th scope="row">{property.propValue}</th>;
+
+				} else {
+					return <td>{property.propValue}</td>;
+				}
+			})
+		}
 		</tr>;
 	}
 }
+
+//<td>
+//	<button type="button" className="btn btn-link btn-sm" onClick={() => this.downloadOnClick(config.id)}><img src={img_download} /></button>
+//	<button type="button" className="btn btn-link btn-sm" onClick={() => this.editOnClick(config.id)}><img src={img_edit} /></button>
+//</td>
