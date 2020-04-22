@@ -19,6 +19,7 @@ namespace ODCServices.WebUi.Services
 				new UiConfigProperty{ Id = Guid.NewGuid().ToString(), DisplayName = "OLSSAdmin", XmlPath = "Config.OLSS.AdminName" },
 				new UiConfigProperty{ Id = Guid.NewGuid().ToString(), DisplayName = "OLSSAdminPassword", XmlPath = "Config.OLSS.AdminPswd" },
 				new UiConfigProperty{ Id = Guid.NewGuid().ToString(), DisplayName = "CMAdminPassword", XmlPath = "Config.CM.AdminPswd" },
+				new UiConfigProperty{ Id = Guid.NewGuid().ToString(), DisplayName = "New unexpected property", XmlPath = "New.unexpected.property" },
 			};
 		}
 

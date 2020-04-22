@@ -9,7 +9,8 @@
 			<tr>
 				{
 					headers.map((header) => {
-						return <th key={header.id} scope="col">{header.name}</th>;
+						const minWidth = header.columnMinWidthPx;
+						return <th key={header.id} className="text-center" scope="col" style={{ minWidth: minWidth + 'px' }}>{header.name}</th>;
 					})
 				}
 			</tr>

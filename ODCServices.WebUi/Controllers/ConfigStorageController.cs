@@ -9,7 +9,6 @@ namespace ODCServices.WebUi.Controllers
 {
     public class ConfigStorageController : Controller
     {
-	    private List<UiConfig> _configs;
 	    private readonly IConfigStorageService _configStorageService;
 
 	    public ConfigStorageController(IConfigStorageService configStorageService)
@@ -24,12 +23,19 @@ namespace ODCServices.WebUi.Controllers
 
         public IActionResult GetAll()
         {
-			List<string> ownPropNames = new List<string>{ "id", "name", "version", "created" };
+			List<string> ownPropNames = new List<string>
+			{
+				nameof(UiConfig.Id), 
+				nameof(UiConfig.Name), 
+				nameof(UiConfig.Version), 
+				nameof(UiConfig.Created)
+			};
 
 	        return Json(new
 	        {
 				builtInHeaders = ownPropNames
 					.Select(item => new { id = item, name = item })
+					.Where(p => p.id != nameof(UiConfig.Id))
 					.ToList(),
 				headers = _configStorageService
 					.GetAllProperties()
@@ -45,7 +51,10 @@ namespace ODCServices.WebUi.Controllers
 					.Select(config => new
 						{
 							configId = config.Id,
-							properties = config.GetAllProperties().Select(p => new { propId = p.Key.Id, propValue = p.Value }).ToList()
+							properties = config
+								.GetAllProperties()
+								.Select(p => new { propId = p.Key.Id, propValue = p.Value })
+								.ToList()
 						})
 					.ToList()
 			});
@@ -55,7 +64,7 @@ namespace ODCServices.WebUi.Controllers
         {
 	        return Json(new
 	        {
-		        result = _configs.FirstOrDefault(c => c.Id == configId)
+		        result = _configStorageService.GetConfigs().FirstOrDefault(c => c.Id == configId)
 	        });
         }
     }

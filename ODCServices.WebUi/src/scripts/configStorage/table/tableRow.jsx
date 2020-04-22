@@ -7,7 +7,7 @@ export class TableRow extends React.Component {
 	}
 
 	downloadOnClick(id) {
-		var downloadUrl = this.props.downloadUrl + "?configId=" + id;
+		const downloadUrl = this.props.downloadUrl + "?configId=" + id;
 		this.getData(downloadUrl);
 	}
 
@@ -20,32 +20,35 @@ export class TableRow extends React.Component {
 		
 		xhr.open("get", downloadUrl, true);
 		xhr.onload = function () {
-			var data = JSON.parse(xhr.responseText);
+			const data = JSON.parse(xhr.responseText);
 			alert(data.result.name);
 		}.bind(this);
 		xhr.send();
 	}
 
 	render() {
-		var config = this.props.config;
-		var configId = config.id;
-		var headers = this.props.headers;
-		var properties = config.properties;
-		return <tr key={configId}>{
-			properties.map((property) => {
-				if (property.propId === "Name") {
-					return <th scope="row">{property.propValue}</th>;
+		const config = this.props.config;
+		const configId = config.configId;
+		const headers = this.props.headers;
+		const properties = config.properties;
 
+		return <tr key={configId}>{
+			headers.map((header) => {
+				var property = properties.find(p => p.propId === header.id);
+				if (property != undefined) {
+					return (header.id === "Name") ? <th scope="row" className="text-center">{property.propValue}</th> : <td className= "text-center">{property.propValue}</td>;
 				} else {
-					return <td>{property.propValue}</td>;
+					return <td className="text-center">-</td>;
 				}
 			})
 		}
+			<td className="text-center">
+				<div>
+					<button type="button" className="btn btn-link btn-sm" onClick={() => this.downloadOnClick(configId)}><img src={img_download} /></button>
+					<button type="button" className="btn btn-link btn-sm" onClick={() => this.editOnClick(configId)}><img src={img_edit} /></button>
+				</div>
+			</td>
 		</tr>;
 	}
 }
 
-//<td>
-//	<button type="button" className="btn btn-link btn-sm" onClick={() => this.downloadOnClick(config.id)}><img src={img_download} /></button>
-//	<button type="button" className="btn btn-link btn-sm" onClick={() => this.editOnClick(config.id)}><img src={img_edit} /></button>
-//</td>

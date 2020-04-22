@@ -15,6 +15,28 @@ export class ConfigTable extends React.Component {
 		
 	}
 
+	appendColumnWidth(header) {
+		const configs = this.props.configs;
+		let maxSymbolsInString = 1;
+		const pixelsForASymbol = 10;
+
+		for (var i = 0; i < configs.length; i++) {
+			const config = configs[i];
+			const currentProperty = config.properties.find(p => p.propId === header.id);
+
+			if (currentProperty != undefined){
+				const propLength = currentProperty.propValue.length;
+				maxSymbolsInString = propLength > maxSymbolsInString ? propLength : maxSymbolsInString;
+			}
+		}
+		const columnMinWidthPx = maxSymbolsInString * pixelsForASymbol;
+		return {
+			id: header.id,
+			name: header.name,
+			columnMinWidthPx: columnMinWidthPx
+		}
+	}
+
 	getData(downloadUrl) {
 		var xhr = new XMLHttpRequest();
 		
@@ -27,17 +49,20 @@ export class ConfigTable extends React.Component {
 	}
 
 	render() {
-		var headers = this.props.headers;
+		const actionColumn = { id: "Action", name: "Action", columnMinWidthPx: "100" };
+		var headers = this.props.headers.map(header => this.appendColumnWidth(header)).concat(actionColumn);
 		var configs = this.props.configs;
 
-		return <table className="table table-hover table-sm">
-			<TableHeader headers={headers}/>
-			<tbody>{
-				configs.map((config) => {
-					return <TableRow headers={headers} config={config}/>;
-				})
-			}
-			</tbody>
-		</table>;
+		return <div className="table-responsive">
+			       <table className="table table-hover table-sm">
+						<TableHeader headers={headers}/>
+				       <tbody>{
+					       configs.map((config) => {
+							   return <TableRow headers={this.props.headers} config={config} downloadUrl={this.props.downloadUrl}/>;
+					       })
+				       }
+				       </tbody>
+			       </table>
+		       </div>;
 	}
 }
