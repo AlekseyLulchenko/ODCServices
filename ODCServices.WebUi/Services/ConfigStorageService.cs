@@ -104,7 +104,7 @@ namespace ODCServices.WebUi.Services
 					{
 						new KeyValuePair<UiConfigProperty, string>(_allProperties[0], "OLSSAdmin Value 6"),
 						new KeyValuePair<UiConfigProperty, string>(_allProperties[1], "OLSSAdminPassword Value 6"),
-						new KeyValuePair<UiConfigProperty, string>(_allProperties[2], "CMAdminPassword Value 6"),
+						new KeyValuePair<UiConfigProperty, string>(_allProperties[3], "Value 6"),
 					})
 				}
 			};
