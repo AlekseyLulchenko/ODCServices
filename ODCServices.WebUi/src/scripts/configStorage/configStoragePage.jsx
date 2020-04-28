@@ -5,6 +5,7 @@ export class ConfigStoragePage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			showNewConfigModal: false,
 			headers: [],
 			configs: []
 		};
@@ -36,7 +37,9 @@ export class ConfigStoragePage extends React.Component {
 	}
 
 	showNewConfigDialog() {
-		
+		this.setState({
+			showNewConfigModal: true
+		});
 	}
 
 	render() {
@@ -51,12 +54,9 @@ export class ConfigStoragePage extends React.Component {
 				<button
 					type="button"
 					className="btn btn-success"
-					data-toggle="modal"
-					data-placement="bottom"
-					data-target="#newConfigModal"
-					onClick={() => this.showNewConfigDialog()}>Add new config file</button>
+					onClick={() => this.showNewConfigDialog()}>Add new Config</button>
 			</nav>
-			<NewConfigModal/>
+			<NewConfigModal visible={this.state.showNewConfigModal}/>
 			<ConfigTable headers={this.state.headers} configs={this.state.configs} downloadUrl={this.props.downloadUrl} />
 			
 		</div>;
