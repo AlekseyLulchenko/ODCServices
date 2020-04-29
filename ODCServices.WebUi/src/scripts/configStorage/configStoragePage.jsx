@@ -43,6 +43,12 @@ export class ConfigStoragePage extends React.Component {
 	}
 
 	render() {
+		const addNewConfigUrl = this.props.addNewConfigUrl;
+		const showNewConfigModal = this.state.showNewConfigModal;
+		const headers = this.state.headers;
+		const configs = this.state.configs;
+		const downloadUrl = this.props.downloadUrl;
+
 		return <div>
 			<div className="text-center">
 				<h1 className="display-4">Config Storage</h1>	
@@ -56,8 +62,8 @@ export class ConfigStoragePage extends React.Component {
 					className="btn btn-success"
 					onClick={() => this.showNewConfigDialog()}>Add new Config</button>
 			</nav>
-			<NewConfigModal visible={this.state.showNewConfigModal}/>
-			<ConfigTable headers={this.state.headers} configs={this.state.configs} downloadUrl={this.props.downloadUrl} />
+			<NewConfigModal visible={showNewConfigModal} addNewUrl={addNewConfigUrl}/>
+			<ConfigTable headers={headers} configs={configs} downloadUrl={downloadUrl} />
 			
 		</div>;
 	}

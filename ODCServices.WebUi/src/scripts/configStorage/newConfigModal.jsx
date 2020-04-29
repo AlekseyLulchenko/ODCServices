@@ -1,12 +1,48 @@
 ﻿export class NewConfigModal extends React.Component{
 	constructor(props) {
 		super(props);
+		this.newConfig = {
+			name: "",
+			version: ""
+		};
+	}
+
+	postData(url, data, callBack) {
+		var xhr = new XMLHttpRequest();
+
+		var formData = new FormData();
+		formData.append('name', data.name);
+		formData.append('version', data.version);
+
+		xhr.open("POST", url, true);
+
+		xhr.onload = function () {
+			const response = JSON.parse(xhr.responseText);
+			callBack(response);
+		}.bind(this);
+		xhr.send(formData);
 	}
 
 	componentDidUpdate() {
 		if (this.props.visible === true) {
 			$('#newConfigModal').modal('toggle');
 		}
+	}
+
+	onNameChange(e) {
+		this.newConfig.name = e.target.value;
+	}
+
+	onVersionChange(e) {
+		this.newConfig.version = e.target.value;
+	}
+
+	onSaveClick() {
+		const addNewUrl = this.props.addNewUrl;
+
+		this.postData(addNewUrl, this.newConfig, (response) => {
+			alert(response.result);
+		});
 	}
 
 	render() {
@@ -23,12 +59,12 @@
 							       <form>
 								       <div className="form-group">
 									       <label htmlFor="config-name" className="col-form-label">Display name:</label>
-											<input type="text" className="form-control" id="config-name"/>
+											<input type="text" className="form-control" id="config-name" onChange={(e) => this.onNameChange(e)}/>
 								       </div>
 
 								       <div className="form-group">
 									       <label htmlFor="config-version" className="col-form-label">Product version:</label>
-											<input type="text" className="form-control" id="config-version"></input>
+									<input type="text" className="form-control" id="config-version" onChange={(e) => this.onVersionChange(e)}></input>
 										</div>
 								       <div className="form-group">
 									       <label htmlFor="config" className="col-form-label">Select a file:</label>
@@ -38,7 +74,7 @@
 						       </div>
 						       <div className="modal-footer">
 							       <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-							       <button type="button" className="btn btn-primary">Save</button>
+							       <button type="button" className="btn btn-primary" onClick={() => this.onSaveClick()}>Save</button>
 						       </div>
 					       </div>
 				       </div>

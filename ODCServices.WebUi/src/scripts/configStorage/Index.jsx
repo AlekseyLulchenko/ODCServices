@@ -1,7 +1,7 @@
 ﻿import { ConfigStoragePage } from "./configStoragePage";
 const getAllUrl = "ConfigStorage/GetAll";
 const downloadUrl = "ConfigStorage/Download";
-const addNewConfigUrl = "ConfigStorage/AddNewConfig";
+const addNewConfigUrl = "ConfigStorage/AddNew";
 
 ReactDOM.render(
 	<ConfigStoragePage

@@ -12,15 +12,15 @@ namespace ODCServices.WebUi.Extensions
 	{
 		internal static void AddPasswordsService(this IServiceCollection serviceCollection)
 		{
-			serviceCollection.AddScoped<IObfuscator, ExternalExePasswordObfuscator>();
-			serviceCollection.AddScoped<IPasswordManager, PasswordManager>();
-			serviceCollection.AddScoped<IPasswordsService, PasswordsService>();
+			serviceCollection.AddTransient<IObfuscator, ExternalExePasswordObfuscator>();
+			serviceCollection.AddTransient<IPasswordManager, PasswordManager>();
+			serviceCollection.AddTransient<IPasswordsService, PasswordsService>();
 		}
 
 		internal static void AddConfigStorageService(this IServiceCollection serviceCollection)
 		{
-			serviceCollection.AddScoped<IConfigStorageManager, ConfigStorageManager>();
-			serviceCollection.AddScoped<IConfigStorageService, ConfigStorageService>();
+			serviceCollection.AddSingleton<IConfigStorageManager, ConfigStorageManager>();
+			serviceCollection.AddSingleton<IConfigStorageService, ConfigStorageService>();
 		}
 	}
 }

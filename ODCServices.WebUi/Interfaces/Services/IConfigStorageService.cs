@@ -7,5 +7,6 @@ namespace ODCServices.WebUi.Interfaces.Services
 	{
 		List<UiConfig> GetConfigs();
 		List<UiConfigProperty> GetAllProperties();
+		void AddNewConfig(UiConfig newConfig);
 	}
 }

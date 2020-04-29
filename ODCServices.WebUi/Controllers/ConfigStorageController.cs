@@ -9,11 +9,11 @@ namespace ODCServices.WebUi.Controllers
 {
     public class ConfigStorageController : Controller
     {
-	    private readonly IConfigStorageService _configStorageService;
+	    //private readonly IConfigStorageService _configStorageService;
 
-	    public ConfigStorageController(IConfigStorageService configStorageService)
+	    public ConfigStorageController(/*IConfigStorageService configStorageService*/)
 	    {
-		    _configStorageService = configStorageService;
+		    //_configStorageService = configStorageService;
 	    }
 
         public IActionResult Index()
@@ -21,7 +21,7 @@ namespace ODCServices.WebUi.Controllers
             return View();
         }
 
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromServices] IConfigStorageService configStorageService)
         {
 			List<string> ownPropNames = new List<string>
 			{
@@ -37,7 +37,7 @@ namespace ODCServices.WebUi.Controllers
 					.Select(item => new { id = item, name = item })
 					.Where(p => p.id != nameof(UiConfig.Id))
 					.ToList(),
-				headers = _configStorageService
+				headers = configStorageService
 					.GetAllProperties()
 					.Select(prop => new
 						{
@@ -46,7 +46,7 @@ namespace ODCServices.WebUi.Controllers
 						})
 					.ToList(),
 
-				configs = _configStorageService
+				configs = configStorageService
 					.GetConfigs()
 					.Select(config => new
 						{
@@ -60,12 +60,22 @@ namespace ODCServices.WebUi.Controllers
 			});
         }
 
-		public IActionResult Download(string configId)
+		public IActionResult Download([FromServices] IConfigStorageService configStorageService, string configId)
         {
 	        return Json(new
 	        {
-		        result = _configStorageService.GetConfigs().FirstOrDefault(c => c.Id == configId)
+		        result = configStorageService.GetConfigs().FirstOrDefault(c => c.Id == configId)
 	        });
         }
+
+		[HttpPost]
+		public IActionResult AddNew([FromServices] IConfigStorageService configStorageService, UiConfig newConfig)
+		{
+			configStorageService.AddNewConfig(newConfig);
+			return Json(new
+			{
+				result = newConfig?.Name
+			});
+		}
     }
 }
