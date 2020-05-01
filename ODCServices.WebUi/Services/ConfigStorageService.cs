@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using ODCServices.Core.Interfaces.ConfigStorage;
 using ODCServices.WebUi.Interfaces.Services;
+using ODCServices.WebUi.Interfaces.Validators;
 using ODCServices.WebUi.Models.ConfigStorage;
+using ODCServices.WebUi.Validators;
 
 namespace ODCServices.WebUi.Services
 {
@@ -124,6 +126,12 @@ namespace ODCServices.WebUi.Services
 			newConfig.Id = Guid.NewGuid().ToString();
 			newConfig.Created = DateTime.Now.ToString(DATETIME_FORMAT);
 			_allConfigs.Add(newConfig);
+		}
+
+		public IValidationResult ValidateConfig(UiConfig uiConfig)
+		{
+			IConfigValidator configValidator = new ConfigValidator();
+			return configValidator.IsValid(uiConfig);
 		}
 	}
 }

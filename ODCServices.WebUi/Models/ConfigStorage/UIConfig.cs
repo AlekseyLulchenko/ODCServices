@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace ODCServices.WebUi.Models.ConfigStorage
 {
@@ -9,6 +10,7 @@ namespace ODCServices.WebUi.Models.ConfigStorage
 		public string Name { get; set; }
 		public string Version { get; set; }
 		public string Created { get; set; }
+		public IFormFile File { get; set; }
 
 		public Dictionary<UiConfigProperty, string> Properties = new Dictionary<UiConfigProperty, string>();
 

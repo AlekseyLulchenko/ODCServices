@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ODCServices.WebUi.Interfaces.Services;
+using ODCServices.WebUi.Interfaces.Validators;
 using ODCServices.WebUi.Models.ConfigStorage;
 
 namespace ODCServices.WebUi.Controllers
@@ -70,13 +71,22 @@ namespace ODCServices.WebUi.Controllers
         }
 
 		[HttpPost]
-		public IActionResult AddNew([FromServices] IConfigStorageService configStorageService, UiConfig newConfig, IFormFile config)
+		public IActionResult AddNew([FromServices] IConfigStorageService configStorageService, UiConfig newConfig)
 		{
-			configStorageService.AddNewConfig(newConfig);
-			return Json(new
+			IValidationResult configValidationResult = configStorageService.ValidateConfig(newConfig);
+			string jsonResult = "";
+			if (configValidationResult.IsValid)
 			{
-				result = newConfig?.Name
-			});
+				configStorageService.AddNewConfig(newConfig);
+				jsonResult = "success";
+			}
+			else
+			{
+				jsonResult = string.Join(" ", configValidationResult.ValidationErrors);
+			}
+
+			return Json(new { result = jsonResult });
 		}
+
     }
 }

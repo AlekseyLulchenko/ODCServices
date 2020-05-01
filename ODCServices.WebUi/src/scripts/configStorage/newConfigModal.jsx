@@ -14,7 +14,7 @@
 		var formData = new FormData();
 		formData.append('name', data.name);
 		formData.append('version', data.version);
-		formData.append('config', data.file);
+		formData.append('file', data.file);
 
 		xhr.open("POST", url, true);
 
@@ -50,7 +50,11 @@
 		const addNewUrl = this.props.addNewUrl;
 
 		this.postData(addNewUrl, this.newConfig, (response) => {
-			alert(response.result);
+			if (response.result === "success") {
+				$('#newConfigModal').modal('toggle');
+			} else {
+				alert(response.result);
+			}
 		});
 	}
 
