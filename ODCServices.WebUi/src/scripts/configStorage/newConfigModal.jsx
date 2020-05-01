@@ -3,7 +3,8 @@
 		super(props);
 		this.newConfig = {
 			name: "",
-			version: ""
+			version: "",
+			file: ""
 		};
 	}
 
@@ -13,6 +14,7 @@
 		var formData = new FormData();
 		formData.append('name', data.name);
 		formData.append('version', data.version);
+		formData.append('config', data.file);
 
 		xhr.open("POST", url, true);
 
@@ -26,6 +28,9 @@
 	componentDidUpdate() {
 		if (this.props.visible === true) {
 			$('#newConfigModal').modal('toggle');
+			$('#config-name')[0].value = "";
+			$('#config-version')[0].value = "";
+			$('#config')[0].value = "";
 		}
 	}
 
@@ -35,6 +40,10 @@
 
 	onVersionChange(e) {
 		this.newConfig.version = e.target.value;
+	}
+
+	onConfigChoose(e) {
+		this.newConfig.file = e.target.files[0];
 	}
 
 	onSaveClick() {
@@ -58,17 +67,16 @@
 						       <div className="modal-body">
 							       <form>
 								       <div className="form-group">
-									       <label htmlFor="config-name" className="col-form-label">Display name:</label>
+											<label htmlFor="config-name" className="col-form-label">Display name:</label>
 											<input type="text" className="form-control" id="config-name" onChange={(e) => this.onNameChange(e)}/>
 								       </div>
-
 								       <div className="form-group">
 									       <label htmlFor="config-version" className="col-form-label">Product version:</label>
-									<input type="text" className="form-control" id="config-version" onChange={(e) => this.onVersionChange(e)}></input>
+											<input type="text" className="form-control" id="config-version" onChange={(e) => this.onVersionChange(e)}/>
 										</div>
 								       <div className="form-group">
 									       <label htmlFor="config" className="col-form-label">Select a file:</label>
-											<input type="file" className="form-control-file" id="config"/>
+											<input type="file" className="form-control-file" id="config" onChange={(e) => this.onConfigChoose(e)}/>
 								       </div>
 							       </form>
 						       </div>

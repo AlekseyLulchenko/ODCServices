@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ODCServices.WebUi.Interfaces.Services;
 using ODCServices.WebUi.Models.ConfigStorage;
@@ -69,7 +70,7 @@ namespace ODCServices.WebUi.Controllers
         }
 
 		[HttpPost]
-		public IActionResult AddNew([FromServices] IConfigStorageService configStorageService, UiConfig newConfig)
+		public IActionResult AddNew([FromServices] IConfigStorageService configStorageService, UiConfig newConfig, IFormFile config)
 		{
 			configStorageService.AddNewConfig(newConfig);
 			return Json(new
