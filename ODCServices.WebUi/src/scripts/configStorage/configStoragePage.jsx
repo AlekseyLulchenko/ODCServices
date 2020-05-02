@@ -62,7 +62,7 @@ export class ConfigStoragePage extends React.Component {
 					className="btn btn-success"
 					onClick={() => this.showNewConfigDialog()}>Add new Config</button>
 			</nav>
-			<NewConfigModal visible={showNewConfigModal} addNewUrl={addNewConfigUrl}/>
+			<NewConfigModal visible={showNewConfigModal} addNewUrl={addNewConfigUrl} onClose={() => this.loadAll()}/>
 			<ConfigTable headers={headers} configs={configs} downloadUrl={downloadUrl} />
 			
 		</div>;

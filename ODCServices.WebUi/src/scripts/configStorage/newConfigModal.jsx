@@ -27,11 +27,15 @@
 
 	componentDidUpdate() {
 		if (this.props.visible === true) {
-			$('#newConfigModal').modal('toggle');
+			this.toggleModal();
 			$('#config-name')[0].value = "";
 			$('#config-version')[0].value = "";
 			$('#config')[0].value = "";
 		}
+	}
+
+	toggleModal() {
+		$('#newConfigModal').modal('toggle');
 	}
 
 	onNameChange(e) {
@@ -51,7 +55,8 @@
 
 		this.postData(addNewUrl, this.newConfig, (response) => {
 			if (response.result === "success") {
-				$('#newConfigModal').modal('toggle');
+				this.toggleModal();
+				this.props.onClose();
 			} else {
 				alert(response.result);
 			}
