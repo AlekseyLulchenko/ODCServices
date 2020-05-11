@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using ODCServices.Core.Interfaces.ConfigStorage;
+using ODCServices.Core.Models;
 using ODCServices.WebUi.Interfaces.Services;
 using ODCServices.WebUi.Interfaces.Validators;
 using ODCServices.WebUi.Models.ConfigStorage;
@@ -125,7 +126,13 @@ namespace ODCServices.WebUi.Services
 		{
 			newConfig.Id = Guid.NewGuid().ToString();
 			newConfig.Created = DateTime.Now.ToString(DATETIME_FORMAT);
-			_allConfigs.Add(newConfig);
+			_configStorageManager.AddConfig(new CoreConfig
+			{
+				Created = newConfig.Created,
+				Id = newConfig.Id,
+				Name = newConfig.Name,
+				Version = newConfig.Version
+			});
 		}
 
 		public IValidationResult ValidateConfig(UiConfig uiConfig)

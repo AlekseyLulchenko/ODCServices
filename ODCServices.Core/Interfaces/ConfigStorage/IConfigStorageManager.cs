@@ -1,7 +1,10 @@
-﻿namespace ODCServices.Core.Interfaces.ConfigStorage
+﻿using System.Collections.Generic;
+
+namespace ODCServices.Core.Interfaces.ConfigStorage
 {
 	public interface IConfigStorageManager
 	{
-		ICoreConfig GetAllConfigs();
+		IEnumerable<ICoreConfig> GetAllConfigs();
+		void AddConfig(ICoreConfig newConfig);
 	}
 }
