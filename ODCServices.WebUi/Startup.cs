@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Features;
@@ -22,6 +23,7 @@ namespace ODCServices.WebUi
 			services.AddControllersWithViews();
 			services.AddPasswordsService();
 			services.AddConfigStorageService();
+			services.AddAutoMapper(typeof(Startup));
 			services.Configure<FormOptions>(options =>
 			{
 				options.MultipartBodyLengthLimit = 1048576; // 1 MB
