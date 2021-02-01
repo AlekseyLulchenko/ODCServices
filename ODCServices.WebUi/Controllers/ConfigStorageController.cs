@@ -1,45 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Http;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ODCServices.WebUi.Interfaces.Services;
+using ODCServices.ConfigStorage.Core.Interfaces;
+using ODCServices.ConfigStorage.Core.Models;
 using ODCServices.WebUi.Interfaces.Validators;
 using ODCServices.WebUi.Models.ConfigStorage;
+using ODCServices.WebUi.Validators;
 
 namespace ODCServices.WebUi.Controllers
 {
     public class ConfigStorageController : Controller
     {
-	    //private readonly IConfigStorageService _configStorageService;
+		private readonly IConfigStorageService _configStorageService;
 
-	    public ConfigStorageController(/*IConfigStorageService configStorageService*/)
-	    {
-		    //_configStorageService = configStorageService;
-	    }
+		private const string DATETIME_FORMAT = "d MMM yyyy";
+		private readonly IMapper _mapper;
+
+		public ConfigStorageController(IConfigStorageService configStorageService, IMapper mapper)
+		{
+			_mapper = mapper;
+			_configStorageService = configStorageService;
+		}
 
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult GetAll([FromServices] IConfigStorageService configStorageService)
+        public IActionResult GetAll()
         {
-			List<string> ownPropNames = new List<string>
-			{
-				nameof(UiConfig.Id), 
-				nameof(UiConfig.Name), 
-				nameof(UiConfig.Version), 
-				nameof(UiConfig.Created)
-			};
-
 	        return Json(new
 	        {
-				builtInHeaders = ownPropNames
+				builtInHeaders = UiConfig.BuiltInPropertiesList
+					.Where(p => p != nameof(UiConfig.Id))
 					.Select(item => new { id = item, name = item })
-					.Where(p => p.id != nameof(UiConfig.Id))
 					.ToList(),
-				headers = configStorageService
+				headers = _configStorageService
 					.GetAllProperties()
 					.Select(prop => new
 						{
@@ -48,13 +45,15 @@ namespace ODCServices.WebUi.Controllers
 						})
 					.ToList(),
 
-				configs = configStorageService
+				configs = _configStorageService
 					.GetConfigs()
-					.Select(config => new
+					.Select(coreConfig => _mapper.Map<UiConfig>(coreConfig))
+					.Select(uiConfig => new
 						{
-							configId = config.Id,
-							properties = config
+							configId = uiConfig.Id,
+							properties = uiConfig
 								.GetAllProperties()
+								.Where(p => p.Key.Id != nameof(UiConfig.Id))
 								.Select(p => new { propId = p.Key.Id, propValue = p.Value })
 								.ToList()
 						})
@@ -62,22 +61,23 @@ namespace ODCServices.WebUi.Controllers
 			});
         }
 
-		public IActionResult Download([FromServices] IConfigStorageService configStorageService, string configId)
+		public IActionResult Download(Guid configId)
         {
 	        return Json(new
 	        {
-		        result = configStorageService.GetConfigs().FirstOrDefault(c => c.Id == configId)
+		        result = _configStorageService.GetConfigs().FirstOrDefault(c => c.Id == configId)
 	        });
         }
 
 		[HttpPost]
-		public IActionResult AddNew([FromServices] IConfigStorageService configStorageService, UiConfig newConfig)
+		public IActionResult AddNew(UiConfig newConfig)
 		{
-			IValidationResult configValidationResult = configStorageService.ValidateConfig(newConfig);
+			IConfigValidator validator = new ConfigValidator();
+			IValidationResult configValidationResult = validator.IsValid(newConfig);
 			string jsonResult = "";
 			if (configValidationResult.IsValid)
 			{
-				configStorageService.AddNewConfig(newConfig);
+				_configStorageService.AddNewConfig(_mapper.Map<CoreConfig>(newConfig));
 				jsonResult = "success";
 			}
 			else

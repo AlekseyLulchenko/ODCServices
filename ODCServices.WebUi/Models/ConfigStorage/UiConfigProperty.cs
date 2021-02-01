@@ -1,4 +1,6 @@
-﻿namespace ODCServices.WebUi.Models.ConfigStorage
+﻿using ODCServices.WebUi.Interfaces;
+
+namespace ODCServices.WebUi.Models.ConfigStorage
 {
 	public class UiConfigProperty
 	{

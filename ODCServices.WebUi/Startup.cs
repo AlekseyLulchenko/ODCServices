@@ -21,7 +21,7 @@ namespace ODCServices.WebUi
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllersWithViews();
-			services.AddPasswordsService();
+			services.AddPasswordService();
 			services.AddConfigStorageService();
 			services.AddAutoMapper(typeof(Startup));
 			services.Configure<FormOptions>(options =>

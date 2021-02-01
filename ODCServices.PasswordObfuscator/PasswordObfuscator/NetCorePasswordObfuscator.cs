@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-using ODCServices.Core.Interfaces.Passwords;
+using ODCServices.PasswordObfuscator.Interfaces;
 
-namespace ODCServices.Core.PasswordObfuscator
+namespace ODCServices.PasswordObfuscator.PasswordObfuscator
 {
-	public class NetCorePasswordObfuscator : IObfuscator
+	public class NetCorePasswordObfuscator : IPasswordObfuscator
 	{
 		private const int saltLength = 3;
 		

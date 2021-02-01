@@ -1,17 +1,17 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using ODCServices.Core.Interfaces.Passwords;
+using ODCServices.PasswordObfuscator.Interfaces;
 
-namespace ODCServices.Core.PasswordObfuscator
+namespace ODCServices.PasswordObfuscator.PasswordObfuscator
 {
-	public class ExternalExePasswordObfuscator : IObfuscator
+	public class ExternalExePasswordPasswordObfuscator : IPasswordObfuscator
 	{
 		private const string EXE_FILE_NAME = "";
 
 		private readonly string _exeFileFullName;
 
-		public ExternalExePasswordObfuscator()
+		public ExternalExePasswordPasswordObfuscator()
 		{
 			DirectoryInfo directoryInfo = new DirectoryInfo(Assembly.GetExecutingAssembly().Location);
 			_exeFileFullName = Path.Combine(directoryInfo.Parent + "\\Utilities\\Obfuscator\\DecodePaswd.exe");

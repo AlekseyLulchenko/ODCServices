@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using ODCServices.WebUi.Interfaces.Services;
+using ODCServices.PasswordObfuscator.Interfaces;
 using ODCServices.WebUi.Models;
 
 namespace ODCServices.WebUi.Controllers
 {
 	public class ODCServicesController : Controller
 	{
-		private readonly IPasswordsService _passwordsService;
+		private readonly IPasswordObfuscatorService _passwordsService;
 
-		public ODCServicesController(IPasswordsService passwordsService)
+		public ODCServicesController(IPasswordObfuscatorService passwordsService)
 		{
 			_passwordsService = passwordsService;
 		}
@@ -30,7 +30,7 @@ namespace ODCServices.WebUi.Controllers
 			string obfuscatedPassword = "";
 			try
 			{
-				obfuscatedPassword = _passwordsService.ObfuscatePassword(plainPassword);
+				obfuscatedPassword = _passwordsService.Obfuscate(plainPassword);
 			}
 			catch (Exception)
 			{
@@ -44,7 +44,7 @@ namespace ODCServices.WebUi.Controllers
 			string plainPassword = "";
 			try
 			{
-				plainPassword = _passwordsService.DeObfuscatePassword(obfuscatedPassword);
+				plainPassword = _passwordsService.DeObfuscate(obfuscatedPassword);
 			}
 			catch (Exception)
 			{

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ODCServices.Core.Models;
-using ODCServices.Data.Models;
+using ODCServices.ConfigStorage.Core.Models;
+using ODCServices.ConfigStorage.Data.Models;
 using ODCServices.WebUi.Models.ConfigStorage;
 
 namespace ODCServices.WebUi
@@ -11,6 +11,9 @@ namespace ODCServices.WebUi
 		{
 			CreateMap<UiConfig, CoreConfig>().ReverseMap();
 			CreateMap<CoreConfig, DbConfig>().ReverseMap();
+
+			CreateMap<UiConfigProperty, CoreConfigProperty>().ReverseMap();
+			CreateMap<CoreConfigProperty, DbConfigProperty>().ReverseMap();
 		}
 	}
 }

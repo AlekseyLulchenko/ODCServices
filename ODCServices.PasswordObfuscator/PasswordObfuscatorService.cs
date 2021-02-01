@@ -1,12 +1,12 @@
-﻿using ODCServices.Core.Interfaces.Passwords;
+﻿using ODCServices.PasswordObfuscator.Interfaces;
 
-namespace ODCServices.Core
+namespace ODCServices.PasswordObfuscator
 {
-	public class PasswordManager : IPasswordManager
+	public class PasswordObfuscatorService : IPasswordObfuscatorService
 	{
-		private readonly IObfuscator _obfuscator;
+		private readonly IPasswordObfuscator _obfuscator;
 
-		public PasswordManager(IObfuscator obfuscator)
+		public PasswordObfuscatorService(IPasswordObfuscator obfuscator)
 		{
 			_obfuscator = obfuscator;
 		}

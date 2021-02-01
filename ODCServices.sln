@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ODCServices.Core", "ODCServices.Core\ODCServices.Core.csproj", "{C0DC2F22-2398-43F5-A24A-A35AAF10B107}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ODCServices.ConfigStorage", "ODCServices.ConfigStorage\ODCServices.ConfigStorage.csproj", "{C0DC2F22-2398-43F5-A24A-A35AAF10B107}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ODCServices.WebUi", "ODCServices.WebUi\ODCServices.WebUi.csproj", "{4DFA2758-CE91-430F-8566-90EF16D7EA4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODCServices.Data", "ODCServices.Data\ODCServices.Data.csproj", "{AFA614D0-FB65-4252-A322-A77E3B1EEBA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODCServices.PasswordObfuscator", "ODCServices.PasswordObfuscator\ODCServices.PasswordObfuscator.csproj", "{689841AD-B2F9-47BE-BEAE-CD97714F7529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{4DFA2758-CE91-430F-8566-90EF16D7EA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DFA2758-CE91-430F-8566-90EF16D7EA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DFA2758-CE91-430F-8566-90EF16D7EA4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFA614D0-FB65-4252-A322-A77E3B1EEBA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFA614D0-FB65-4252-A322-A77E3B1EEBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFA614D0-FB65-4252-A322-A77E3B1EEBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFA614D0-FB65-4252-A322-A77E3B1EEBA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{689841AD-B2F9-47BE-BEAE-CD97714F7529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{689841AD-B2F9-47BE-BEAE-CD97714F7529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{689841AD-B2F9-47BE-BEAE-CD97714F7529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{689841AD-B2F9-47BE-BEAE-CD97714F7529}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

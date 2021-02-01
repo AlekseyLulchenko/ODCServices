@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 
-namespace ODCServices.Core.PasswordObfuscator
+namespace ODCServices.PasswordObfuscator.PasswordObfuscator
 {
 	internal class Cryptor
 	{

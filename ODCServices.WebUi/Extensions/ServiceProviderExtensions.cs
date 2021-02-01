@@ -1,26 +1,23 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ODCServices.Core;
-using ODCServices.Core.Interfaces.ConfigStorage;
-using ODCServices.Core.Interfaces.Passwords;
-using ODCServices.Core.PasswordObfuscator;
-using ODCServices.WebUi.Interfaces.Services;
-using ODCServices.WebUi.Services;
+using ODCServices.ConfigStorage;
+using ODCServices.ConfigStorage.Core.Interfaces;
+using ODCServices.PasswordObfuscator;
+using ODCServices.PasswordObfuscator.Interfaces;
+using ODCServices.PasswordObfuscator.PasswordObfuscator;
 
 namespace ODCServices.WebUi.Extensions
 {
 	internal static class ServiceProviderExtensions
 	{
-		internal static void AddPasswordsService(this IServiceCollection serviceCollection)
+		internal static void AddPasswordService(this IServiceCollection serviceCollection)
 		{
-			serviceCollection.AddTransient<IObfuscator, ExternalExePasswordObfuscator>();
-			serviceCollection.AddTransient<IPasswordManager, PasswordManager>();
-			serviceCollection.AddTransient<IPasswordsService, PasswordsService>();
+			serviceCollection.AddTransient<IPasswordObfuscator, ExternalExePasswordPasswordObfuscator>();
+			serviceCollection.AddTransient<IPasswordObfuscatorService, PasswordObfuscatorService>();
 		}
 
 		internal static void AddConfigStorageService(this IServiceCollection serviceCollection)
 		{
-			serviceCollection.AddSingleton<IConfigStorageManager, ConfigStorageManager>();
-			serviceCollection.AddSingleton<IConfigStorageService, ConfigStorageService>();
+			serviceCollection.AddTransient<IConfigStorageService, ConfigStorageService>();
 		}
 	}
 }
